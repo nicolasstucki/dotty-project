@@ -377,9 +377,6 @@ object Gen extends GenArities{
   def oneOf[T](xs: Seq[T]): Gen[T] =
     choose(0, xs.size-1).map(xs(_)).suchThat(xs.contains)
 
-  /** Picks a random value from a list */
-  def oneOf[T](t0: T, t1: T, tn: T*): Gen[T] = oneOf(t0 +: t1 +: tn)
-
   /** Picks a random generator from a list */
   def oneOf[T](g0: Gen[T], g1: Gen[T], gn: Gen[T]*): Gen[T] = {
     val gs = g0 +: g1 +: gn
