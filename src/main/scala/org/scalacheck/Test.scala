@@ -202,7 +202,9 @@ object Test {
   private def secure[T](x: => T): Either[T,Throwable] =
     try { Left(x) } catch { case e: Throwable => Right(e) }
 
-  private[scalacheck] lazy val cmdLineParser = new CmdLineParser {
+  private[scalacheck] lazy val cmdLineParser = new CmdLineParserImpl
+
+  private class CmdLineParserImpl extends CmdLineParser {
     object OptMinSuccess extends IntOpt {
       val default = Parameters.default.minSuccessfulTests
       val names = Set("minSuccessfulTests", "s")
