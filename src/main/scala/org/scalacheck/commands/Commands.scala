@@ -270,7 +270,7 @@ trait Commands {
     s: State, seqCmds: Commands, parCmds: List[Commands]
   )
 
-  private implicit val shrinkActions = Shrink[Actions] { as =>
+  private implicit val shrinkActions: Shrink[Actions] = Shrink[Actions] { as =>
     val shrinkedCmds: Stream[Actions] =
       Shrink.shrink(as.seqCmds).map(cs => as.copy(seqCmds = cs)) append
       Shrink.shrink(as.parCmds).map(cs => as.copy(parCmds = cs))
@@ -291,7 +291,7 @@ trait Commands {
   ): (Prop, List[List[(Command,Try[String])]]) = {
     import concurrent._
     val tp = java.util.concurrent.Executors.newFixedThreadPool(pcmds.size)
-    implicit val ec = ExecutionContext.fromExecutor(tp)
+    implicit val ec: ExecutionContextExecutor = ExecutionContext.fromExecutor(tp)
     val memo = collection.mutable.Map.empty[(State,List[Commands]), List[State]]
 
     def endStates(scss: (State, List[Commands])): List[State] = {

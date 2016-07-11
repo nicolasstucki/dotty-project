@@ -334,12 +334,12 @@ object Prop {
   /** Implicit method that makes a number of property operators on values of
    * type `Any` available in the current scope.
    * See [[Prop.ExtendedAny]] for documentation on the operators. */
-  implicit def AnyOperators[T <% Pretty](x: => T) = new ExtendedAny[T](x)
+  implicit def AnyOperators[T <% Pretty](x: => T): ExtendedAny[T] = new ExtendedAny[T](x)
 
   /** Implicit method that makes a number of property operators on boolean
    * values available in the current scope. See [[Prop.ExtendedBoolean]] for
    * documentation on the operators. */
-  implicit def BooleanOperators(b: => Boolean) = new ExtendedBoolean(b)
+  implicit def BooleanOperators(b: => Boolean): ExtendedBoolean = new ExtendedBoolean(b)
 
   /** Implicit conversion of Boolean values to Prop values. */
   implicit def propBoolean(b: Boolean): Prop = Prop(b)
