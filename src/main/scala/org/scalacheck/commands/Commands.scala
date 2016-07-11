@@ -129,7 +129,7 @@ trait Commands {
     private[Commands] def runPC(sut: Sut): (Try[String], State => Prop) = {
       import Prop.BooleanOperators
       val r = Try(run(sut))
-      (r.map(_.toString), s => preCondition(s) ==> postCondition(s,r))
+      (r.map(_.toString), (s: State) => preCondition(s) ==> postCondition(s,r))
     }
   }
 
