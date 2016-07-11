@@ -66,7 +66,7 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
 
   /** Creates an Arbitrary instance */
   def apply[T](g: => Gen[T]): Arbitrary[T] = new Arbitrary[T] {
-    lazy val arbitrary = g
+    val arbitrary = g
   }
 
   /** Returns an arbitrary generator for the type T. */
