@@ -43,7 +43,7 @@ sealed trait FreqMap[T] extends Serializable {
     val underlying = FreqMap.this.underlying transform {
       case (x,n) => n - fm.getCount(x).getOrElse(0)
     }
-    lazy val total = (0 /: underlying.valuesIterator) (_ + _)
+    val total = (0 /: underlying.valuesIterator) (_ + _)
   }
 
   def getCount(t: T) = underlying.get(t)
