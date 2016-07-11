@@ -227,7 +227,7 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
   implicit lazy val arbProp: Arbitrary[Prop] = {
     import Prop._
     val undecidedOrPassed = forAll { b: Boolean =>
-      b ==> true
+      (b: Prop) ==> true
     }
     Arbitrary(frequency(
       (4, falsified),
