@@ -93,7 +93,7 @@ object GenSpecification extends Properties("Gen") {
   }
 
   property("choose-xmap") = {
-    implicit val chooseDate = Choose.xmap[Long, Date](new Date(_), _.getTime)
+    implicit val chooseDate: Choose[Date] = Choose.xmap[Long, Date](new Date(_), _.getTime)
     forAll { (l: Date, h: Date) =>
       if(l.after(h)) choose(l, h) == fail
       else forAll(choose(l,h)) { x => x.compareTo(l) >= 0 && x.compareTo(h) <= 0 }
@@ -195,7 +195,7 @@ object GenSpecification extends Properties("Gen") {
 
   property("resultOf3") = {
     case class B(n: Int, s: String, b: Boolean)
-    implicit val arbB = Arbitrary(resultOf(B))
+    implicit val arbB: Arbitrary[B] = Arbitrary(resultOf(B))
     forAll { b:B => true }
   }
 
