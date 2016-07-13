@@ -24,7 +24,7 @@ object TestSpecification extends Properties("Test") {
   val failing = forAll( (n: Int) => false )
 
   val exhausted = forAll( (n: Int) =>
-    (n > 0 && n < 0) ==> (n == n)
+    ((n > 0 && n < 0): Prop) ==> (n == n)
   )
 
   val shrinked = forAll( (t: (Int,Int,Int)) => false )
@@ -59,7 +59,7 @@ object TestSpecification extends Properties("Test") {
       s"minSuccessful=${prms.minSuccessfulTests}, " +
       s"maxDiscardRatio=${prms.maxDiscardRatio}, " +
       s"actualDiscardRatio=${r.discarded.toFloat / r.succeeded}, " +
-      s"workers=${prms.workers}" |: f(prms,r)
+      s"workers=${prms.workers}" |: (f(prms,r): Prop)
     }
 
   property("stopCondition") = resultInvariant { (prms, r) =>
@@ -112,8 +112,8 @@ object TestSpecification extends Properties("Test") {
 
   property("propGenException") = forAll { prms: Test.Parameters =>
     Test.check(prms, genException).status match {
-      case x:PropException => true :| x.toString
-      case x => false :| x.toString
+      case x:PropException => (true: Prop) :| x.toString
+      case x => (false: Prop) :| x.toString
     }
   }
 
