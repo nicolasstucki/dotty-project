@@ -68,7 +68,7 @@ object ShrinkSpecification extends Properties("Shrink") {
     (math.abs(n) > 1E-5d) ==> shrinkClosure(n).contains(0)
   }
 
-  implicit def vectorShrink[A: Shrink] = Shrink.xmap[List[A],Vector[A]](Vector(_: _*), _.toList)
+  implicit def vectorShrink[A: Shrink]: Shrink[Vector[A]] = Shrink.xmap[List[A],Vector[A]](Vector(_: _*), _.toList)
 
   property("either shrinks") = forAll { e: Either[Int, Long] =>
     !shrink(e).contains(e)
