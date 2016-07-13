@@ -219,36 +219,39 @@ private[scalacheck] trait GenArities{
 
   /** Gen creator for Function20 */
   def function20[T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,Z](g: Gen[Z])(implicit co1: Cogen[T1],co2: Cogen[T2],co3: Cogen[T3],co4: Cogen[T4],co5: Cogen[T5],co6: Cogen[T6],co7: Cogen[T7],co8: Cogen[T8],co9: Cogen[T9],co10: Cogen[T10],co11: Cogen[T11],co12: Cogen[T12],co13: Cogen[T13],co14: Cogen[T14],co15: Cogen[T15],co16: Cogen[T16],co17: Cogen[T17],co18: Cogen[T18],co19: Cogen[T19],co20: Cogen[T20]): Gen[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20) => Z] =
-    Gen.gen { (p, seed0) =>
-      val f: (T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20) => Z =
-        (t1: T1,t2: T2,t3: T3,t4: T4,t5: T5,t6: T6,t7: T7,t8: T8,t9: T9,t10: T10,t11: T11,t12: T12,t13: T13,t14: T14,t15: T15,t16: T16,t17: T17,t18: T18,t19: T19,t20: T20) => g.doApply(p, co20.perturb(co19.perturb(co18.perturb(co17.perturb(co16.perturb(co15.perturb(co14.perturb(co13.perturb(co12.perturb(co11.perturb(co10.perturb(co9.perturb(co8.perturb(co7.perturb(co6.perturb(co5.perturb(co4.perturb(co3.perturb(co2.perturb(co1.perturb(seed0, t1), t2), t3), t4), t5), t6), t7), t8), t9), t10), t11), t12), t13), t14), t15), t16), t17), t18), t19), t20)).retrieve.get
-      new Gen.R[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20) => Z] {
-        val result = Some(f)
-        val seed = seed0.next
-      }
+  Gen.gen { (p, seed0) =>
+    val f: (T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20) => Z =
+      (t1: T1,t2: T2,t3: T3,t4: T4,t5: T5,t6: T6,t7: T7,t8: T8,t9: T9,t10: T10,t11: T11,t12: T12,t13: T13,t14: T14,t15: T15,t16: T16,t17: T17,t18: T18,t19: T19,t20: T20) => g.doApply(p, co20.perturb(co19.perturb(co18.perturb(co17.perturb(co16.perturb(co15.perturb(co14.perturb(co13.perturb(co12.perturb(co11.perturb(co10.perturb(co9.perturb(co8.perturb(co7.perturb(co6.perturb(co5.perturb(co4.perturb(co3.perturb(co2.perturb(co1.perturb(seed0, t1), t2), t3), t4), t5), t6), t7), t8), t9), t10), t11), t12), t13), t14), t15), t16), t17), t18), t19), t20)).retrieve.get
+    new Gen.R[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20) => Z] {
+      val result = Some(f)
+      val seed = seed0.next
     }
+  }
 
   /** Gen creator for Function21 */
   def function21[T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,Z](g: Gen[Z])(implicit co1: Cogen[T1],co2: Cogen[T2],co3: Cogen[T3],co4: Cogen[T4],co5: Cogen[T5],co6: Cogen[T6],co7: Cogen[T7],co8: Cogen[T8],co9: Cogen[T9],co10: Cogen[T10],co11: Cogen[T11],co12: Cogen[T12],co13: Cogen[T13],co14: Cogen[T14],co15: Cogen[T15],co16: Cogen[T16],co17: Cogen[T17],co18: Cogen[T18],co19: Cogen[T19],co20: Cogen[T20],co21: Cogen[T21]): Gen[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21) => Z] =
-    Gen.gen { (p, seed0) =>
-      val f: (T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21) => Z =
-        (t1: T1,t2: T2,t3: T3,t4: T4,t5: T5,t6: T6,t7: T7,t8: T8,t9: T9,t10: T10,t11: T11,t12: T12,t13: T13,t14: T14,t15: T15,t16: T16,t17: T17,t18: T18,t19: T19,t20: T20,t21: T21) => g.doApply(p, co21.perturb(co20.perturb(co19.perturb(co18.perturb(co17.perturb(co16.perturb(co15.perturb(co14.perturb(co13.perturb(co12.perturb(co11.perturb(co10.perturb(co9.perturb(co8.perturb(co7.perturb(co6.perturb(co5.perturb(co4.perturb(co3.perturb(co2.perturb(co1.perturb(seed0, t1), t2), t3), t4), t5), t6), t7), t8), t9), t10), t11), t12), t13), t14), t15), t16), t17), t18), t19), t20), t21)).retrieve.get
-      new Gen.R[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21) => Z] {
-        val result = Some(f)
-        val seed = seed0.next
-      }
+  Gen.gen { (p, seed0) =>
+    val f: (T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21) => Z =
+      (t1: T1,t2: T2,t3: T3,t4: T4,t5: T5,t6: T6,t7: T7,t8: T8,t9: T9,t10: T10,t11: T11,t12: T12,t13: T13,t14: T14,t15: T15,t16: T16,t17: T17,t18: T18,t19: T19,t20: T20,t21: T21) => g.doApply(p, co21.perturb(co20.perturb(co19.perturb(co18.perturb(co17.perturb(co16.perturb(co15.perturb(co14.perturb(co13.perturb(co12.perturb(co11.perturb(co10.perturb(co9.perturb(co8.perturb(co7.perturb(co6.perturb(co5.perturb(co4.perturb(co3.perturb(co2.perturb(co1.perturb(seed0, t1), t2), t3), t4), t5), t6), t7), t8), t9), t10), t11), t12), t13), t14), t15), t16), t17), t18), t19), t20), t21)).retrieve.get
+    new Gen.R[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21) => Z] {
+      val result = Some(f)
+      val seed = seed0.next
     }
+  }
 
   /** Gen creator for Function22 */
-  def function22[T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22,Z](g: Gen[Z])(implicit co1: Cogen[T1],co2: Cogen[T2],co3: Cogen[T3],co4: Cogen[T4],co5: Cogen[T5],co6: Cogen[T6],co7: Cogen[T7],co8: Cogen[T8],co9: Cogen[T9],co10: Cogen[T10],co11: Cogen[T11],co12: Cogen[T12],co13: Cogen[T13],co14: Cogen[T14],co15: Cogen[T15],co16: Cogen[T16],co17: Cogen[T17],co18: Cogen[T18],co19: Cogen[T19],co20: Cogen[T20],co21: Cogen[T21],co22: Cogen[T22]): Gen[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22) => Z] =
+  def function22[T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22,Z](g: Gen[Z])(implicit co1: Cogen[T1],co2: Cogen[T2],co3: Cogen[T3],co4: Cogen[T4],co5: Cogen[T5],co6: Cogen[T6],co7: Cogen[T7],co8: Cogen[T8],co9: Cogen[T9],co10: Cogen[T10],co11: Cogen[T11],co12: Cogen[T12],co13: Cogen[T13],co14: Cogen[T14],co15: Cogen[T15],co16: Cogen[T16],co17: Cogen[T17],co18: Cogen[T18],co19: Cogen[T19],co20: Cogen[T20],co21: Cogen[T21],co22: Cogen[T22]): Gen[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22) => Z] = {
+    val cos = (co1, co2, co3, co4, co5, co6, co7, co8, co9, co10, co11, co12, co13, co14, co15, co16, co17, co18, co19, co20, co21, co22)
     Gen.gen { (p, seed0) =>
-      val f: (T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22) => Z =
-        (t1: T1,t2: T2,t3: T3,t4: T4,t5: T5,t6: T6,t7: T7,t8: T8,t9: T9,t10: T10,t11: T11,t12: T12,t13: T13,t14: T14,t15: T15,t16: T16,t17: T17,t18: T18,t19: T19,t20: T20,t21: T21,t22: T22) => g.doApply(p, co22.perturb(co21.perturb(co20.perturb(co19.perturb(co18.perturb(co17.perturb(co16.perturb(co15.perturb(co14.perturb(co13.perturb(co12.perturb(co11.perturb(co10.perturb(co9.perturb(co8.perturb(co7.perturb(co6.perturb(co5.perturb(co4.perturb(co3.perturb(co2.perturb(co1.perturb(seed0, t1), t2), t3), t4), t5), t6), t7), t8), t9), t10), t11), t12), t13), t14), t15), t16), t17), t18), t19), t20), t21), t22)).retrieve.get
-      new Gen.R[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22) => Z] {
+      val (cco1, cco2, cco3, cco4, cco5, cco6, cco7, cco8, cco9, cco10, cco11, cco12, cco13, cco14, cco15, cco16, cco17, cco18, cco19, cco20, cco21, cco22) = cos
+      val f: (T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22) => Z =
+        (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7, t8: T8, t9: T9, t10: T10, t11: T11, t12: T12, t13: T13, t14: T14, t15: T15, t16: T16, t17: T17, t18: T18, t19: T19, t20: T20, t21: T21, t22: T22) => g.doApply(p, cco22.perturb(cco21.perturb(cco20.perturb(cco19.perturb(cco18.perturb(cco17.perturb(cco16.perturb(cco15.perturb(cco14.perturb(cco13.perturb(cco12.perturb(cco11.perturb(cco10.perturb(cco9.perturb(cco8.perturb(cco7.perturb(cco6.perturb(cco5.perturb(cco4.perturb(cco3.perturb(cco2.perturb(cco1.perturb(seed0, t1), t2), t3), t4), t5), t6), t7), t8), t9), t10), t11), t12), t13), t14), t15), t16), t17), t18), t19), t20), t21), t22)).retrieve.get
+      new Gen.R[(T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22) => Z] {
         val result = Some(f)
         val seed = seed0.next
       }
     }
+  }
 
 
   // zip //
@@ -548,10 +551,10 @@ private[scalacheck] trait GenArities{
   }
 
   /** Combines the given generators into one generator that produces a
-   *  tuple of their generated values. */
+    *  tuple of their generated values. */
   def zip[T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22](
-    g1:Gen[T1], g2:Gen[T2], g3:Gen[T3], g4:Gen[T4], g5:Gen[T5], g6:Gen[T6], g7:Gen[T7], g8:Gen[T8], g9:Gen[T9], g10:Gen[T10], g11:Gen[T11], g12:Gen[T12], g13:Gen[T13], g14:Gen[T14], g15:Gen[T15], g16:Gen[T16], g17:Gen[T17], g18:Gen[T18], g19:Gen[T19], g20:Gen[T20], g21:Gen[T21], g22:Gen[T22]
-  ): Gen[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22)] = {
+     g1:Gen[T1], g2:Gen[T2], g3:Gen[T3], g4:Gen[T4], g5:Gen[T5], g6:Gen[T6], g7:Gen[T7], g8:Gen[T8], g9:Gen[T9], g10:Gen[T10], g11:Gen[T11], g12:Gen[T12], g13:Gen[T13], g14:Gen[T14], g15:Gen[T15], g16:Gen[T16], g17:Gen[T17], g18:Gen[T18], g19:Gen[T19], g20:Gen[T20], g21:Gen[T21], g22:Gen[T22]
+   ): Gen[(T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22)] = {
     val g = for {
       t1<-g1; t2<-g2; t3<-g3; t4<-g4; t5<-g5; t6<-g6; t7<-g7; t8<-g8; t9<-g9; t10<-g10; t11<-g11; t12<-g12; t13<-g13; t14<-g14; t15<-g15; t16<-g16; t17<-g17; t18<-g18; t19<-g19; t20<-g20; t21<-g21; t22<-g22
     } yield (t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22)
