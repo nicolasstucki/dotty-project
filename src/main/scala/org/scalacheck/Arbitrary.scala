@@ -305,14 +305,14 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
   /** Arbitrary instance of any [[org.scalacheck.util.Buildable]] container
    *  (such as lists, arrays, streams, etc). The maximum size of the container
    *  depends on the size generation parameter. */
-  implicit def arbContainer[C[_],T](implicit
+  implicit def arbContainer[T, C[T]](implicit
     a: Arbitrary[T], b: Buildable[T,C[T]], t: C[T] => Traversable[T]
   ): Arbitrary[C[T]] = Arbitrary(buildableOf[C[T],T](arbitrary[T]))
 
   /** Arbitrary instance of any [[org.scalacheck.util.Buildable]] container
    *  (such as maps). The maximum size of the container depends on the size
    *  generation parameter. */
-  implicit def arbContainer2[C[_,_],T,U](implicit
+  implicit def arbContainer2[T,U, C[T,U]](implicit
     a: Arbitrary[(T,U)], b: Buildable[(T,U),C[T,U]], t: C[T,U] => Traversable[(T,U)]
   ): Arbitrary[C[T,U]] = Arbitrary(buildableOf[C[T,U],(T,U)](arbitrary[(T,U)]))
 
