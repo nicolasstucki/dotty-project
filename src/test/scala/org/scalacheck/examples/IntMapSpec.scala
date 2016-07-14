@@ -24,7 +24,7 @@ object IntMapSpec extends org.scalacheck.Properties("IntMap") {
 
   property("size") = forAll { l: List[Int] =>
     val (refMap, intMap) = createMaps(l)
-    intMap.size ?= refMap.size
+    intMap.size ?= refMap.keySet().size()
   }
   property("isEmpty") = forAll { l: List[Int] =>
     val (refMap, intMap) = createMaps(l)
