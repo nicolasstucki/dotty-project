@@ -84,7 +84,7 @@ sealed abstract class Gen[+T] {
       res.copy(s = { x:T => res.sieve(x) && f(x) })
     }
     override def sieveCopy(x: Any) =
-      try Gen.this.sieveCopy(x) && f(x.asInstanceOf[T])
+      try Gen.this.sieveCopy(x) && x != null && f(x.asInstanceOf[T])
       catch { case _: java.lang.ClassCastException => false }
   }
 
