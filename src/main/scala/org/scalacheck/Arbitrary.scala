@@ -143,8 +143,8 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
   /**** Arbitrary instances of other common types ****/
 
   /** Arbitrary instance of String */
-  implicit lazy val arbString: Arbitrary[String] = ???
-//    Arbitrary(arbitrary[List[_]] map (_.mkString))
+  implicit lazy val arbString: Arbitrary[String] =
+    Arbitrary(arbitrary[List[Char]] map (_.mkString))
 
   /** Arbitrary instance of Date */
   implicit lazy val arbDate: Arbitrary[java.util.Date] =
