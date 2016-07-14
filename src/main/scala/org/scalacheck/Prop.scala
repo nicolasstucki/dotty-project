@@ -860,7 +860,7 @@ object Prop {
     f: A1 => P)(implicit
     p: P => Prop,
     a1: Arbitrary[A1], s1: Shrink[A1], pp1: A1 => Pretty
-  ): Prop = forAllShrink(arbitrary[A1],shrink[A1])(f andThen p)
+  ): Prop = forAllShrink(arbitrary[A1], shrink[A1])(x =>  p(f(x)))
 
   /** Converts a function into a universally quantified property */
   def forAll[A1,A2,P] (
