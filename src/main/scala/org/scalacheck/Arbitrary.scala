@@ -12,8 +12,9 @@ package org.scalacheck
 import language.higherKinds
 import concurrent.Future
 import scala.util.{Failure, Success, Try}
+import util.{Buildable, FreqMap}
 
-import util.{FreqMap, Buildable}
+import scala.collection.generic.CanBuildFrom
 
 
 sealed abstract class Arbitrary[T] {
@@ -144,7 +145,7 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
 
   /** Arbitrary instance of String */
   implicit lazy val arbString: Arbitrary[String] =
-    Arbitrary(arbitrary[List[Char]] map (_.mkString))
+    Arbitrary(arbitrary[List[Char]](arbContainer[List, Char]) map (_.mkString))
 
   /** Arbitrary instance of Date */
   implicit lazy val arbDate: Arbitrary[java.util.Date] =
@@ -321,3 +322,18 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
     Arbitrary(Gen.oneOf(values))
   }
 }
+
+//object Baz {
+//  class ArbitraryX[T]
+//
+//  implicit def arbCharX: ArbitraryX[Char] = null
+//
+//  def arbitraryX[T](implicit a: ArbitraryX[T]) = null
+//
+//  trait BuildableX[T,C]
+//  implicit def buildableCanBuildFrom[T,F,C](implicit c: CanBuildFrom[F,T,C]): BuildableX[T,C] = null
+//
+//  implicit def arbContainerX[C[_], T](implicit a: ArbitraryX[T], b: BuildableX[T,C[T]], t: C[T] => Traversable[T]): ArbitraryX[C[T]] = null
+//
+//  arbitraryX[List[Char]]// (arbContainerX[List, Char])
+//}
