@@ -230,7 +230,7 @@ trait Commands {
         sutId match {
           case Some(id) =>
             val sut = newSut(as.s)
-            def removeSut  {
+            def removeSut: Unit = {
               suts.synchronized {
                 suts -= id
                 destroySut(sut)
