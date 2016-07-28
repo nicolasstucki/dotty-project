@@ -12,8 +12,9 @@ package org.scalacheck
 import language.higherKinds
 import concurrent.Future
 import scala.util.{Failure, Success, Try}
+import util.{Buildable, FreqMap}
 
-import util.{FreqMap, Buildable}
+import scala.collection.generic.CanBuildFrom
 
 
 sealed abstract class Arbitrary[T] {
@@ -144,7 +145,7 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
 
   /** Arbitrary instance of String */
   implicit lazy val arbString: Arbitrary[String] =
-    Arbitrary(arbitrary[List[Char]] map (_.mkString))
+    Arbitrary(arbitrary[List[Char]](arbContainer[Char, List]) map (_.mkString)) // FIXME
 
   /** Arbitrary instance of Date */
   implicit lazy val arbDate: Arbitrary[java.util.Date] =
@@ -305,7 +306,7 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
   /** Arbitrary instance of any [[org.scalacheck.util.Buildable]] container
    *  (such as lists, arrays, streams, etc). The maximum size of the container
    *  depends on the size generation parameter. */
-  implicit def arbContainer[T, C[T]](implicit
+  implicit def arbContainer[T, C[_]](implicit
     a: Arbitrary[T], b: Buildable[T,C[T]], t: C[T] => Traversable[T]
   ): Arbitrary[C[T]] = Arbitrary(buildableOf[C[T],T](arbitrary[T]))
 
@@ -320,5 +321,14 @@ private[scalacheck] sealed trait ArbitraryLowPriority {
     val values = A.runtimeClass.getMethod("values").invoke(null).asInstanceOf[Array[A]]
     Arbitrary(Gen.oneOf(values))
   }
+
+
+//  class Foo[T]
+//  class Bar[T, C]
+//
+//  implicit def foo[C[_], T](implicit b: Bar[T, C[T]]): Foo[C[T]] = ???
+//  implicit def bar[T, F, C](): Bar[T,C] = ???
+//
+//  implicitly[Foo[List[Char]]]
 
 }

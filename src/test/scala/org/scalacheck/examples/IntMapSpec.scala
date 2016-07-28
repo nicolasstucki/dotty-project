@@ -22,22 +22,22 @@ object IntMapSpec extends org.scalacheck.Properties("IntMap") {
     (hm, im)
   }
 
-  property("size") = forAll { l: List[Int] =>
-    val (refMap, intMap) = createMaps(l)
-    intMap.size ?= refMap.keySet().size()
-  }
-  property("isEmpty") = forAll { l: List[Int] =>
-    val (refMap, intMap) = createMaps(l)
-    intMap.isEmpty ?= refMap.isEmpty
-  }
-  property("add") = forAll { (l: List[Int], k: Int, v: String) =>
-    val (refMap, intMap) = createMaps(l)
-    refMap.put(k, v)
-    eqMaps(refMap, intMap + (k -> v))
-  }
-  property("remove") = forAll { (l: List[Int], k: Int) =>
-    val (refMap, intMap) = createMaps(l)
-    refMap.remove(k)
-    eqMaps(refMap, intMap - k)
-  }
+//  property("size") = forAll { l: List[Int] =>
+//    val (refMap, intMap) = createMaps(l)
+//    intMap.size ?= refMap.keySet().size()
+//  }
+//  property("isEmpty") = forAll { l: List[Int] =>
+//    val (refMap, intMap) = createMaps(l)
+//    intMap.isEmpty ?= refMap.isEmpty
+//  }
+//  property("add") = forAll { (l: List[Int], k: Int, v: String) =>
+//    val (refMap, intMap) = createMaps(l)
+//    refMap.put(k, v)
+//    eqMaps(refMap, intMap + (k -> v))
+//  }
+//  property("remove") = forAll { (l: List[Int], k: Int) =>
+//    val (refMap, intMap) = createMaps(l)
+//    refMap.remove(k)
+//    eqMaps(refMap, intMap - k)
+//  }
 }

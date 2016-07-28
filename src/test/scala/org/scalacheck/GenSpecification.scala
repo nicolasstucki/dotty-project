@@ -104,10 +104,10 @@ object GenSpecification extends Properties("Gen") {
 
   property("sized") = forAll((g: Gen[Int]) => sized(i => g) == g)
 
-  property("oneOf n") = forAll { l: List[Int] =>
-    if(l.isEmpty) oneOf(l) == fail
-    else forAll(oneOf(l))(l.contains)
-  }
+//  property("oneOf n") = forAll { l: List[Int] =>
+//    if(l.isEmpty) oneOf(l) == fail
+//    else forAll(oneOf(l))(l.contains)
+//  }
 
   property("oneOf 2") = forAll { (n1:Int, n2:Int) =>
     forAll(oneOf(n1, n2)) { n => n == n1 || n == n2 }
@@ -147,16 +147,16 @@ object GenSpecification extends Properties("Gen") {
     l.length == 0
   }
 
-  property("someOf") = forAll { l: List[Int] =>
-    forAll(someOf(l))(_.toList.forall(l.contains))
-  }
+//  property("someOf") = forAll { l: List[Int] =>
+//    forAll(someOf(l))(_.toList.forall(l.contains))
+//  }
 
-  property("pick") = forAll { l: List[Int] =>
-    forAll(choose(-1, 2*l.length)) { n =>
-      if(n < 0 || n > l.length) pick(n,l) == fail
-      else forAll(pick(n,l)) { m => m.length == n && m.forall(l.contains) }
-    }
-  }
+//  property("pick") = forAll { l: List[Int] =>
+//    forAll(choose(-1, 2*l.length)) { n =>
+//      if(n < 0 || n > l.length) pick(n,l) == fail
+//      else forAll(pick(n,l)) { m => m.length == n && m.forall(l.contains) }
+//    }
+//  }
 
   property("numChar") = forAll(numChar)(_.isDigit)
 
@@ -283,42 +283,42 @@ object GenSpecification extends Properties("Gen") {
   property("random (Trilean => Boolean) functions") = exhaust(N, utf, tf)
   property("random (Trilean => Trilean) functions") = exhaust(N, utf, utf)
 
-  property("oneOf with Buildable supports null in first or 2nd position") = secure {
-    Gen.oneOf(Gen.const(null), Arbitrary.arbitrary[Array[Byte]]).sample.isDefined &&
-    Gen.oneOf(Arbitrary.arbitrary[Array[Byte]], Gen.const(null)).sample.isDefined
-  }
+//  property("oneOf with Buildable supports null in first or 2nd position") = secure {
+//    Gen.oneOf(Gen.const(null), Arbitrary.arbitrary[Array[Byte]]).sample.isDefined &&
+//    Gen.oneOf(Arbitrary.arbitrary[Array[Byte]], Gen.const(null)).sample.isDefined
+//  }
 
   //// See https://github.com/rickynils/scalacheck/issues/209
-  property("uniform double #209") =
-    Prop.forAllNoShrink(Gen.choose(1000000, 2000000)) { n =>
-      var i = 0
-      var sum = 0d
-      var seed = rng.Seed(n)
-      while (i < n) {
-        val (d,s1) = seed.double
-        sum += d
-        i += 1
-        seed = s1
-      }
-      val avg = sum / n
-      s"average = $avg" |: avg >= 0.49 && avg <= 0.51
-    }
+//  property("uniform double #209") =
+//    Prop.forAllNoShrink(Gen.choose(1000000, 2000000)) { n =>
+//      var i = 0
+//      var sum = 0d
+//      var seed = rng.Seed(n)
+//      while (i < n) {
+//        val (d,s1) = seed.double
+//        sum += d
+//        i += 1
+//        seed = s1
+//      }
+//      val avg = sum / n
+//      s"average = $avg" |: avg >= 0.49 && avg <= 0.51
+//    }
 
-  property("uniform long #209") = {
-    val scale = 1d / Long.MaxValue
-    Prop.forAllNoShrink(Gen.choose(1000000, 2000000)) { n =>
-      var i = 0
-      var sum = 0d
-      var seed = rng.Seed(n)
-      while (i < n) {
-        val (l,s1) = seed.long
-        sum += math.abs(l).toDouble * scale
-        i += 1
-        seed = s1
-      }
-      val avg = sum / n
-      s"average = $avg" |: avg >= 0.49 && avg <= 0.51
-    }
-  }
+//  property("uniform long #209") = {
+//    val scale = 1d / Long.MaxValue
+//    Prop.forAllNoShrink(Gen.choose(1000000, 2000000)) { n =>
+//      var i = 0
+//      var sum = 0d
+//      var seed = rng.Seed(n)
+//      while (i < n) {
+//        val (l,s1) = seed.long
+//        sum += math.abs(l).toDouble * scale
+//        i += 1
+//        seed = s1
+//      }
+//      val avg = sum / n
+//      s"average = $avg" |: avg >= 0.49 && avg <= 0.51
+//    }
+//  }
   ////
 }
